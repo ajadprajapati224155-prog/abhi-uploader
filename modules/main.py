@@ -20,6 +20,19 @@ from pyrogram.errors.exceptions.bad_request_400 import StickerEmojiInvalid
 from pyrogram.types.messages_and_media import message
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from bs4 import BeautifulSoup
+from flask import Flask
+from threading import Thread
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "Bot is running!"
+
+def run_web():
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
+
+Thread(target=run_web).start()
 
 bot = Client("bot",
              bot_token= "8734900365:AAGDN69rYcTyVEJbI0sDcwn-cmvRLhBvAms", 
